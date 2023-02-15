@@ -10,7 +10,7 @@ GCP_PROJECT_ID=$1
 GCP_LDAP=$2
 
 echo "${GCP_PROJECT_ID}"
-cd ~/dataplex-labs/setup/org_policy
+cd ~/dataplex-fsi-demo/setup/org_policy
 gcloud config set project ${GCP_PROJECT_ID}
 terraform init
 terraform apply -auto-approve -var project_id=${GCP_PROJECT_ID} 
@@ -19,7 +19,7 @@ status=$?
 
 rm terraform*
 
-cd ~/dataplex-labs/setup/terraform
+cd ~/dataplex-fsi-demo/setup/terraform
 gcloud config set project ${GCP_PROJECT_ID}
 terraform init
 terraform apply -auto-approve -var project_id=${GCP_PROJECT_ID}

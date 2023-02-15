@@ -12,7 +12,7 @@ GCP_ARGOLIS_LDAP=$3
 RAND=$4
 
 echo "${GCP_DATASTORE_PROJECT_ID}"
-cd ~/datamesh-on-gcp/oneclick/org_policy
+cd ~/dataplex-fsi-demo/oneclick/org_policy
 gcloud config set project ${GCP_DATASTORE_PROJECT_ID}
 terraform destroy -auto-approve -var project_id_storage=${GCP_DATASTORE_PROJECT_ID} -var project_id_governance=${GCP_DATAGOV_PROJECT_ID}
 status=$?
@@ -21,7 +21,7 @@ status=$?
 rm terraform*
 rm -rf .terraform*
 
-cd ~/datamesh-on-gcp/oneclick/demo-store/terraform
+cd ~/dataplex-fsi-demo/oneclick/demo-store/terraform
 gcloud config set project ${GCP_DATASTORE_PROJECT_ID}
 terraform destroy -auto-approve -var project_id=${GCP_DATASTORE_PROJECT_ID}
 status=$?

@@ -55,7 +55,7 @@ This repository is a one-click deployment for setting up Dataplex FSI demo.
 8. Trigger the terraform script to setup the infrastructure 
 
     ```bash 
-    cd ~/dataplex-labs/setup/
+    cd ~/dataplex-fsi-demo/setup/
     source ~/.profile
     bash deploy-helper.sh ${PROJECT_ID} ${USERNAME}
     ```

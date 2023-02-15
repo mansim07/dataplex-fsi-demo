@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export PROJECT_ID=$(gcloud config get-value project)
+
+
 # Set the Security Policy for Customer Domain 
 export customer_lake_policy="{\"policy\":{\"bindings\":[{\"role\":\"roles/dataplex.dataOwner\",\"members\":[\"serviceAccount:customer-sa@${PROJECT_ID}.iam.gserviceaccount.com\"]}]}}"
 
@@ -30,7 +33,7 @@ sleep 1m
 
 # Set the Security Policy for Common Domain 
 
-export PROJECT_ID=$(gcloud config get-value project)
+
 
 export central_dq_policy="{\"policy\":{
 \"bindings\": [

@@ -20,7 +20,7 @@ This repository is a one-click deployment for setting up Dataplex FSI demo.
     ```
 5. Setup Environment variable 
 - In cloud shell, declare the following variables after substituting with yours. 
-- For Argolis, use fully qualified email address e.g. joe.user@gmail.com as the USERNAME
+- Use fully qualified email address e.g. joe.user@gmail.com as the USERNAME
 
     ```bash
     echo "export USERNAME=your-email" >> ~/.profile

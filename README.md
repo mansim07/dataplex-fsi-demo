@@ -24,8 +24,17 @@ This repository is a one-click deployment for setting up Dataplex FSI demo.
 
     ```bash
     echo "export USERNAME=your-email" >> ~/.profile
+    ```
+- Setup your project ID. Execute the below command    
+    ```
     echo "export PROJECT_ID=$(gcloud config get-value project)" >> ~/.profile
     ```
+
+- Verify setup
+    ```
+    cat ~/.profile
+    ```
+
     ![profile_validate](/setup/resources/code_artifacts/imgs/profile-validate.png)
 
 6. To get the currently logged in email address, run: 'gcloud auth list as' below:

@@ -240,3 +240,20 @@ module "composer" {
   
   depends_on = [google_compute_firewall.user_firewall_rule]
 } 
+
+####################################################################################
+# Setup Dataplex Security IAM policies 
+# In future this will be moved to terraform based. Today these execute using APIs  
+####################################################################################
+
+resource "null_resource" "dataplex_iam" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      rm -rf /tmp/security.log
+      bash ~/dataplex-fsi-demo/setup/resources/code_artifacts/scripts/apply-security-policies.sh >> /tmp/security.log
+    EOT
+    }
+    depends_on = [
+               module.composer]
+
+  }

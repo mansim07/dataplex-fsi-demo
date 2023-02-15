@@ -1,6 +1,32 @@
 #!/bin/bash
 
 # Set the Security Policy for Customer Domain 
+export customer_lake_policy="{\"policy\":{\"bindings\":[{\"role\":\"roles/dataplex.dataOwner\",\"members\":[\"serviceAccount:customer-sa@${PROJECT_ID}.iam.gserviceaccount.com\"]}]}}"
+
+curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application.json" https://dataplex.googleapis.com/v1/projects/${PROJECT_ID}/locations/us-central1/lakes/consumer-banking--customer--domain:setIamPolicy -d " ${customer_lake_policy}"
+
+if [ $? -eq 0 ]; then 
+    echo "Customer Lake security policy applied successfully!"
+else 
+   echo "Customer Lake security policy application failed!"
+   exit 1 
+fi 
+
+sleep 1m 
+
+export customer_data_product_assert_policy="{\"policy\":{\"bindings\":[{\"role\":\"roles/dataplex.dataReader\",\"members\":[\"serviceAccount:cc-trans-consumer-sa@${PROJECT_ID}.iam.gserviceaccount.com\"]}]}}"
+
+curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application.json" https://dataplex.googleapis.com/v1/projects/${PROJECT_ID}/locations/us-central1/lakes/consumer-banking--customer--domain/zones/customer-data-product-zone:setIamPolicy -d "${customer_data_product_assert_policy}"
+
+if [ $? -eq 0 ]; then 
+    echo "Customer Zone security policy applied successfully!"
+else 
+   echo "Customer  Zone security policy application failed!"
+   exit 1 
+fi 
+
+sleep 1m
+
 
 # Set the Security Policy for Common Domain 
 

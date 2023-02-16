@@ -3,7 +3,7 @@
 export PROJECT_ID=$(gcloud config get-value project)
 
 bq mk \
-    --schema customer-schema.json \
+    --schema ~/dataplex-fsi-demo/setup/resources/code_artifacts/bq-scripts/customer-schema.json \
     ${PROJECT_ID}:customer_data_product.customer_data
 
 

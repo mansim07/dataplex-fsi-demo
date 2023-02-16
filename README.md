@@ -60,3 +60,7 @@ This repository is a one-click deployment for setting up Dataplex FSI demo.
     bash deploy-helper.sh ${PROJECT_ID} ${USERNAME}
     ```
      The script will take about 30-40 minutes to finish.
+
+9. Request for a CPU quota increase in your project region 
+
+10. Go to Airflow and Trigger the "master-dq-dag" 

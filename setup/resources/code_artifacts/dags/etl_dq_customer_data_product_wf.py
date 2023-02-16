@@ -478,9 +478,9 @@ with models.DAG(
                 },
             "spark": {
                     "file_uris": [f"gs://{PROJECT_ID_DG}_dataplex_process/common/log4j-spark-driver-template.properties"],
-                    "main_jar_file_uri": 'gs://{PROJECT_ID_DG}_dataplex_process/common/dataproc-templates-1.0-SNAPSHOT.jar',
+                    "main_jar_file_uri": f"gs://{PROJECT_ID_DG}_dataplex_process/common/dataproc-templates-1.0-SNAPSHOT.jar",
                     "main_class":'com.google.cloud.dataproc.templates.main.DataProcTemplate',
-                    "infrastructure_spec": {"vpc_network": {"sub_network": f"{SUB_NETWORK}"}},
+                    "infrastructure_spec": {"vpc_network": {"sub_network": f"{SUB_NETWORK}"} , "container_image" : {"java_jars": [f"gs://{PROJECT_ID_DG}_dataplex_process/common/dataproc-templates-1.0-SNAPSHOT.jar"] } },
                     },
         }
     )

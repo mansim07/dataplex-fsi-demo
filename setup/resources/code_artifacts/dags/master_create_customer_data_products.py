@@ -49,7 +49,7 @@ default_args = {
 
 
 with DAG(
-        'master_dag_customer_dq',
+        'master_customer-end-to-end-dp',
         schedule_interval=None,
         default_args=default_args,  # Every 1 minute
       #  start_date=days_ago(0),

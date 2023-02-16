@@ -226,7 +226,9 @@ resource "null_resource" "dataplex_iam" {
   provisioner "local-exec" {
     command = <<-EOT
       rm -rf /tmp/security.log
+      rm -rf /tmp/createbqtable.log
       bash ~/dataplex-fsi-demo/setup/resources/code_artifacts/scripts/apply-security-policies.sh >> /tmp/security.log
+      bash ~/dataplex-fsi-demo/setup/resources/code_artifacts/bq-scripts/create-customer-dps.sh >> /tmp/createbqtable.log
     EOT
     }
     depends_on = [google_compute_firewall.user_firewall_rule

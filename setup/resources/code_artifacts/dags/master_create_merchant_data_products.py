@@ -49,7 +49,7 @@ default_args = {
 
 
 with DAG(
-        'master_customer-end-to-end-dp',
+        'master_merchant-end-to-end-dp',
         schedule_interval=None,
         default_args=default_args,  # Every 1 minute
       #  start_date=days_ago(0),
@@ -65,8 +65,8 @@ with DAG(
     Step1: Execute the customer data product etl task 
     """
     externalsensor1 = TriggerDagRunOperator(
-        task_id='create-customer-data-product',
-        trigger_dag_id='etl_with_dq_customer_data_product_wf',
+        task_id='create-merchant-data-product',
+        trigger_dag_id='etl_with_dq_merchant_data_product_wf',
         #external_task_id=None,  # wait for whole DAG to complete
         #check_existence=True,
         wait_for_completion=True
@@ -77,8 +77,8 @@ with DAG(
     Step2: Execute the customer data product data ownership Tag.
     """
     externalsensor2 = TriggerDagRunOperator(
-        task_id='create-customer-dataproduct-information-tag',
-        trigger_dag_id='data_governance_customer_dp_info_tag',
+        task_id='create-merchant-dataproduct-information-tag',
+        trigger_dag_id='data_governance_merchant_dp_info_tag',
         #external_task_id=None,  # wait for whole DAG to complete
         #check_existence=True,
         wait_for_completion=True
@@ -89,8 +89,8 @@ with DAG(
     Step3: Execute the customer data product quality tag
     """
     externalsensor3 = TriggerDagRunOperator(
-        task_id='create-customer-dataproduct-quality-tag',
-        trigger_dag_id='master_dag_customer_dq',
+        task_id='create-merchant-dataproduct-quality-tag',
+        trigger_dag_id='master_dag_merchant_dq',
         #external_task_id=None,  # wait for whole DAG to complete
         #check_existence=True,
          wait_for_completion=True
@@ -102,8 +102,8 @@ with DAG(
     """
 
     externalsensor4 = TriggerDagRunOperator(
-        task_id='create-customer-dataproduct-exchange-tag',
-        trigger_dag_id='data_governance_customer_exchange_tag',
+        task_id='create-merchant-dataproduct-exchange-tag',
+        trigger_dag_id='data_governance_merchant_exchange_tag',
         #external_task_id=None,  # wait for whole DAG to complete
         #check_existence=True,
          wait_for_completion=True

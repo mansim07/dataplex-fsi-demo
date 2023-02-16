@@ -54,7 +54,7 @@ TAG_INPUT_PATH = models.Variable.get('transactions_dq_info_input_path')
 SUB_NETWORK = models.Variable.get('gcp_sub_net')
 TAG_JAR = models.Variable.get('gdc_tag_jar')
 DPLX_TASK_PREFIX = "airflow-trans-dq"
-R_DPLX_TASK_PREFIX = " airflow-trans-etl"
+R_DPLX_TASK_PREFIX = "airflow-trans-etl"
 TAG_MAIN_CLASS = models.Variable.get('data_quality_main_class')
 
 INPUT_DQ_YAML = models.Variable.get('transactions_dq_raw_input_yaml')

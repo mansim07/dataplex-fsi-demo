@@ -63,4 +63,15 @@ This repository is a one-click deployment for setting up Dataplex FSI demo.
 
 9. Request for a CPU quota increase in your project region 
 
-10. Go to Airflow and Trigger the "master-dq-dag" 
+10. Go to Airflow and Trigger the master dags
+
+11. Execute the below commands to populate the overview 
+```bash 
+export PROJECT_ID=$(gcloud config get-value project)
+entry_name=`curl -X GET -H "x-goog-user-project: ${PROJECT_ID}" -H  "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application.json" "https://datacatalog.googleapis.com/v1/entries:lookup?linkedResource=//bigquery.googleapis.com/projects/${PROJECT_ID}/datasets/customer_data_product/tables/customer_data&fields=name" | jq -r '.name'`
+
+
+
+curl -X POST -H "x-goog-user-project: d${PROJECT_ID}" -H  "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application.json" https://datacatalog.googleapis.com/v1/${entry_name}:modifyEntryOverview -d "{\"entryOverview\":{\"overview\":\"<header><h1>Customer Demograhics Data Product</h1></header><br>This customer data table contains the data for customer demographics of all Bank of Mars retail banking customers. It contains PII information that can be accessed on need-to-know basis. <br> Customer data is the information that customers give us while interacting with our business through websites, applications, surveys, social media, marketing initiatives, and other online and offline channels. A good business plan depends on customer data. Data-driven businesses recognize the significance of this and take steps to guarantee that they gather the client data points required to enhance client experience and fine-tune business strategy over time.\"}}"
+
+```

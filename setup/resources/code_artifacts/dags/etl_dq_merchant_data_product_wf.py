@@ -370,6 +370,12 @@ with models.DAG(
 #        dag=dag,
 #    )
 #
+
+
+
+
+
+
     bq_create_merchant_dp_tbl = bigquery.BigQueryInsertJobOperator(
         task_id="bq_create_merchant_dp_tbl",
         impersonation_chain=IMPERSONATION_CHAIN,

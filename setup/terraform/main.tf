@@ -217,6 +217,23 @@ resource "google_compute_firewall" "user_firewall_rule" {
   ]
 }
 
+####################################################################################
+# Setup Dataplex Security IAM policies 
+# In future this will be moved to terraform based. Today these execute using APIs  
+####################################################################################
+
+resource "null_resource" "dataplex_iam" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      rm -rf /tmp/security.log
+      bash ~/dataplex-fsi-demo/setup/resources/code_artifacts/scripts/apply-security-policies.sh >> /tmp/security.log
+    EOT
+    }
+    depends_on = [google_compute_firewall.user_firewall_rule
+               ]
+
+  }
+
 
 ####################################################################################
 # Setup Composer
@@ -238,22 +255,5 @@ module "composer" {
   prefix                        = local._prefix_first_element
   dataplex_process_bucket_name  = local._dataplex_process_bucket_name
   
-  depends_on = [google_compute_firewall.user_firewall_rule]
+  depends_on = [null_resource.dataplex_iam]
 } 
-
-####################################################################################
-# Setup Dataplex Security IAM policies 
-# In future this will be moved to terraform based. Today these execute using APIs  
-####################################################################################
-
-resource "null_resource" "dataplex_iam" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      rm -rf /tmp/security.log
-      bash ~/dataplex-fsi-demo/setup/resources/code_artifacts/scripts/apply-security-policies.sh >> /tmp/security.log
-    EOT
-    }
-    depends_on = [
-               module.composer]
-
-  }

@@ -30,6 +30,10 @@ variable "transactions_curated_bucket_name" {}
 variable "transactions_ref_bucket_name" {}
 variable "data_gen_git_repo" {}
 
+locals {
+  _abs_tmpdir=pathexpand(var.tmpdir)
+}
+
 
 ####################################################################################
 # Generate Sample Data
@@ -162,8 +166,8 @@ resource "time_sleep" "sleep_after_storage" {
 
 resource "google_storage_bucket_object" "gcs_customers_objects" {
   for_each = {
-    format("%s/customer.csv", var.tmpdir) : format("customers_data/dt=%s/customer.csv", var.date_partition),
-    format("%s/cc_customer.csv", var.tmpdir) : format("cc_customers_data/dt=%s/cc_customer.csv", var.date_partition)
+    format("%s/customer.csv", local._abs_tmpdir) : format("customers_data/dt=%s/customer.csv", var.date_partition),
+    format("%s/cc_customer.csv", local._abs_tmpdir) : format("cc_customers_data/dt=%s/cc_customer.csv", var.date_partition)
   }
   name        = each.value
   source      = each.key

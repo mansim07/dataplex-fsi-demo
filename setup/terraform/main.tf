@@ -153,7 +153,7 @@ module "register_assets" {
 
 resource "google_compute_network" "default_network" {
   project                 = var.project_id
-  name                    = "default"
+  name                    = "dataplex-default"
   description             = "Default network"
   auto_create_subnetworks = false
   mtu                     = 1460
@@ -169,7 +169,7 @@ resource "google_compute_network" "default_network" {
 
 resource "google_compute_subnetwork" "main_subnet" {
   project       = var.project_id
-  name          = "default"       #format("%s-misc-subnet", local._prefix)
+  name          = "dataplex-default"       #format("%s-misc-subnet", local._prefix)
   ip_cidr_range = var.ip_range
   region        = var.location
   network       = google_compute_network.default_network.id

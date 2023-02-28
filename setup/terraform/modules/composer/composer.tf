@@ -169,7 +169,7 @@ resource "google_composer_environment" "composer_env" {
         AIRFLOW_VAR_GCP_DW_PROJECT = "${var.datastore_project_id}",
         AIRFLOW_VAR_GCP_MERCHANTS_SA_ACCT = "merchant-sa@${var.project_id}.iam.gserviceaccount.com",
         AIRFLOW_VAR_GCP_PROJECT_REGION = "${var.location}",
-        AIRFLOW_VAR_GCP_SUB_NET = "projects/${var.project_id}/regions/${var.location}/subnetworks/default",
+        AIRFLOW_VAR_GCP_SUB_NET = "projects/${var.project_id}/regions/${var.location}/subnetworks/dataplex-default",
         AIRFLOW_VAR_GCP_TRANSACTIONS_CONSUMER_SA_ACCT = "cc-trans-consumer-sa@${var.project_id}.iam.gserviceaccount.com",
         AIRFLOW_VAR_GCP_TRANSACTIONS_SA_ACCT = "cc-trans-sa@${var.project_id}.iam.gserviceaccount.com",
         AIRFLOW_VAR_GCS_DEST_BUCKET = "test",
